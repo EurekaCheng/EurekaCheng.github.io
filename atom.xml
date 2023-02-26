@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-02-03T16:11:18.403Z</updated>
+  <updated>2023-02-26T10:19:38.556Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,83 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo_butterfly博客使用补充</title>
+    <link href="http://example.com/2023/02/26/hexo-butterfly%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8%E8%A1%A5%E5%85%85/"/>
+    <id>http://example.com/2023/02/26/hexo-butterfly%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8%E8%A1%A5%E5%85%85/</id>
+    <published>2023-02-26T10:13:02.000Z</published>
+    <updated>2023-02-26T10:19:38.556Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="博客知识补充"><a href="#博客知识补充" class="headerlink" title="博客知识补充"></a>博客知识补充</h2><p>图片引用示例：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img 示例.png 示例 %&#125; #后一个示例可以不用写</span><br></pre></td></tr></table></figure><p>博客必须写在生成的.md文件中</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;博客知识补充&quot;&gt;&lt;a href=&quot;#博客知识补充&quot; class=&quot;headerlink&quot; title=&quot;博客知识补充&quot;&gt;&lt;/a&gt;博客知识补充&lt;/h2&gt;&lt;p&gt;图片引用示例：&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table</summary>
+      
+    
+    
+    
+    <category term="web前端" scheme="http://example.com/categories/web%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="博客" scheme="http://example.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI绘图工具搭建与基本使用</title>
+    <link href="http://example.com/2023/02/26/AI%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+    <id>http://example.com/2023/02/26/AI%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</id>
+    <published>2023-02-26T10:04:39.000Z</published>
+    <updated>2023-02-26T10:07:36.726Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p><strong>Stable Diffusion web UI</strong>是基于 Gradio 库的 Stable Diffusion 浏览器界面。</p><p>项目地址：<a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a></p><h2 id="环境配置及注意事项"><a href="#环境配置及注意事项" class="headerlink" title="环境配置及注意事项"></a>环境配置及注意事项</h2><h3 id="readme-md官方安装方式如下"><a href="#readme-md官方安装方式如下" class="headerlink" title="readme.md官方安装方式如下"></a>readme.md官方安装方式如下</h3><h4 id="在-Windows-上自动安装"><a href="#在-Windows-上自动安装" class="headerlink" title="在 Windows 上自动安装"></a>在 Windows 上自动安装</h4><ol><li>安装<a href="https://www.python.org/downloads/windows/">Python 3.10.6</a>，勾选“Add Python to PATH”</li><li>安装<a href="https://git-scm.com/download/win">Git</a>。</li><li>下载 stable-diffusion-webui 存储库，例如通过运行<code>git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git</code>.</li><li><code>webui-user.bat</code>以普通非管理员用户身份从 Windows 资源管理器运行。</li></ol><h4 id="在-Linux-上自动安装"><a href="#在-Linux-上自动安装" class="headerlink" title="在 Linux 上自动安装"></a>在 Linux 上自动安装</h4><ol><li>安装依赖项：</li></ol><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Debian-based:</span><br><span class="line">sudo apt install wget git python3 python3-venv</span><br><span class="line"># Red Hat-based:</span><br><span class="line">sudo dnf install wget git python3</span><br><span class="line"># Arch-based:</span><br><span class="line">sudo pacman -S wget git python3</span><br></pre></td></tr></table></figure><ol><li>要在 中安装<code>/home/$(whoami)/stable-diffusion-webui/</code>，请运行：</li></ol><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash &lt;(wget -qO- https://raw.githubusercontent.com/AUTOMATIC1111/stable-diffusion-webui/master/webui.sh)</span><br></pre></td></tr></table></figure><ol><li>运行<code>webui.sh</code>。</li></ol><p>以上即为官方提供的安装方式，对于有类似安装经验的小伙伴，看到这些已经足够。但是对于“新手”朋友而言，可能在安装过程中就会有很多疑问、遇到各种问题。为了能够一起玩耍共同感受AI魅力，下面我将会以windows系统为例，较为详细地操作一遍，希望能帮到这些朋友。</p><h3 id="较为详细的安装步骤"><a href="#较为详细的安装步骤" class="headerlink" title="较为详细的安装步骤"></a>较为详细的安装步骤</h3><p>我在安装的过程中，尝试过利用已有的Anaconda环境来达到节约储存空间的目的。在过程中，虽然可以使用不是3.10.6版本的python进入到下一步的配置过程，但是提示也说明了，非3.10.6版本的可能不能正常运行。起初，我忽略提示继续安装，然而后续它在我已有torch的情况下，仍然要重新下载torch-1.13.1+cu117。看到这里有些小伙伴可能会想到修改其安装源码来达到我们使用现有环境的目的。不过，我从现实角度出发，这个不过是一个AI工具，我们没必要为了一点储存空间而浪费宝贵的时间，因此我就没有作进一步的探索，而是老老实实地让它自动安装相应版本。以下是我的安装配置过程：</p><p>首先是安装3.10.6版本的python。安装网址：<a href="https://www.python.org/downloads/release/python-3106/">https://www.python.org/downloads/release/python-3106/</a></p><p>这里有两点注意：</p><ol><li>&#x3D;&#x3D;不要下载最新版本的python&#x3D;&#x3D;，因为在后续执行<code>webui-user.bat</code>文件时需要安装可调用GPU的torch，版本为torch-1.13.1+cu117。如果你安装了最新版python，会与该版本的torch发生冲突就无法安装成功。</li><li>在安装python时（双击.exe文件后看到的第一个画面），一定要勾选将python路径添加到环境变量中，不然之后运行<code>webui-user.bat</code>将可能出现无法launch python。如果实在忘了的小伙伴也可以在安装完成后，自己手动添加。方法是先找到你安装python的路径，在路径后加上python.exe，复制，打开设置&gt;系统&gt;系统信息&gt;高级系统设置&gt;环境变量&gt;找到系统变量左侧的Path，选中，再点击新建&gt;将之前复制的路径粘贴进去，然后一路点确定。</li></ol><p>安装后，我们需要按住win+R键，输入cmd打开终端，在输入python或者py，如果出现了python版本信息则证明安装成功。</p><p>其次，我们安装Git。安装网址：<a href="https://git-scm.com/download/win%EF%BC%8C%E9%80%89%E6%8B%A9%E8%87%AA%E5%B7%B1%E7%94%B5%E8%84%91%E5%AF%B9%E5%BA%94%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%8C%E4%B8%8B%E8%BD%BD%EF%BC%8C%E5%AE%89%E8%A3%85%E3%80%82%E8%BF%99%E9%87%8C%E5%BA%94%E8%AF%A5%E6%B2%A1%E5%95%A5%E9%97%AE%E9%A2%98%EF%BC%8C%E5%B0%B1%E5%92%8C%E4%B8%80%E8%88%AC%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%AE%89%E8%A3%85%E4%B8%80%E6%A0%B7%E3%80%82%E5%AE%89%E8%A3%85%E5%A5%BD%E5%90%8E%EF%BC%8C%E6%88%91%E4%BB%AC%E5%88%87%E6%8D%A2%E5%88%B0%E8%87%AA%E5%B7%B1%E8%A6%81%E5%AD%98%E6%94%BE%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E9%BC%A0%E6%A0%87%E5%8F%B3%E5%87%BB%EF%BC%8C%E7%82%B9%E5%87%BB%60Git">https://git-scm.com/download/win，选择自己电脑对应的版本，下载，安装。这里应该没啥问题，就和一般应用程序安装一样。安装好后，我们切换到自己要存放项目的文件夹，鼠标右击，点击`Git</a> Bash Here&#96;进入Git终端，随后输入：git clone <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui.git%EF%BC%8C%E7%AD%89%E5%BE%85%E5%85%8B%E9%9A%86%E5%AE%8C%E6%AF%95%E3%80%82">https://github.com/AUTOMATIC1111/stable-diffusion-webui.git，等待克隆完毕。</a></p><p>最后，我们进入刚刚克隆好的文件，找到<code>wedui-user.bat</code>文件，直接双击运行，它将会自动安装相应的库和文件配置。如果出现了类似“SSLError”问题，你只需要，根据提示“按任意键继续”，退出终端，重新运行<code>wedui-user.bat</code>文件,这一步多是网络问题，需要科学上网并记得设置为全局模式，多尝试几次。或者，根据报错提示，自行下载相应的库、模型。</p><h4 id="“no-xformers”问题解决"><a href="#“no-xformers”问题解决" class="headerlink" title="“no xformers”问题解决"></a>“no xformers”问题解决</h4><p>用编辑器打开<code>webui-user.bat</code>文件，添加如下指令：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">set COMMANDLINE_ARGS=--medvram --reinstall-xformers --xformers</span><br></pre></td></tr></table></figure><p>这条指令就是让我们，再次尝试下载xformers还有相应的模型。如果，还没有解决，我们还是需要多试几次，这主要是网络问题。直到出现本地网址，则说明成功。接下来你可以按住ctrl键，鼠标点击出现的网址，就可以看到AI绘图工具的可视化操作界面了！</p><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>Web UI界面如图：</p><img src="/2023/02/26/AI%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D.png" class="" title="界面介绍"><p>规定在前：✔后数字代表相应功能区，接下来我将会分区介绍。</p><h3 id="基本介绍和使用流程"><a href="#基本介绍和使用流程" class="headerlink" title="基本介绍和使用流程"></a>基本介绍和使用流程</h3><p>首先是在1区选择你下载好的Check Point模型，再到2区填写需要生成图片的文字描述，在4区填写消极的文字描述（可以理解为AI对3区文字描述可能产生误解的部分），再到5区选择生成图片的样式，6区的阈值与5区对应（大则表示“更像”），8区是图片大小，10区是图片数目，9区调节的是图片与文字描述的吻合度（数值越大越符合），11区是种子数（-1代表随机，点一下绿色图标表示固定种子数，这一般用于在同一张图片进行修改），12区是图片生成、中断开关，13区是图片呈现区。</p><h3 id="extra-networks"><a href="#extra-networks" class="headerlink" title="extra networks"></a>extra networks</h3><img src="/2023/02/26/AI%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/extra_networks.png" class=""><p>点击图示图标即可看到，extra networks区，这里可以使你的图片呈现更多种风格的样式。这里就需要小伙伴自己探索啦。</p><h3 id="prompt生成技巧"><a href="#prompt生成技巧" class="headerlink" title="prompt生成技巧"></a>prompt生成技巧</h3><p>这里可以借助ChatGPT，来帮组生成。效果如图：</p><img src="/2023/02/26/AI%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/chatgpt2pic.png" class=""><p>“咒语”：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">下面的prompt是用来指导AI绘画模型创作图像的。它们包含了图像的各种细节，如人物的外观、背景、颜色和光线效果，以及图像的主题和风格。这些prompt的格式经常包含括号内的加权数字，用于指定某些细节的重要性或强调。例如，&quot;(masterpiece:1.5)&quot;表示作品质量是非常重要的，多个括号也有类似作用。此外，如果使用中括号，如&quot;&#123;blue hair:white hair:0.3&#125;&quot;，这代表将蓝发和白发加以融合，蓝发占比为0.3。</span><br><span class="line">以下是用prompt帮助AI模型生成图像的例子：masterpiece,(bestquality),highlydetailed,ultra-detailed,  cold , solo , ( 1girl ) , detailedeyes , shinegoldeneyes ) ( longliverhair ) expressionless , ( long sleeves , puffy sleeves ) ,  ( white wings ) , shinehalo , ( heavymetal : 1 . 2 ) , ( metaljewelry ) ,  cross-lacedfootwear ( chain ) ,  ( Whitedoves : 1 . 2 ) </span><br><span class="line">可以选择的prompt包括：</span><br><span class="line"></span><br><span class="line">颜色</span><br><span class="line">    light（明）</span><br><span class="line">    dark（暗）</span><br><span class="line">    pale（薄）</span><br><span class="line">    deep（濃）</span><br><span class="line">天气 时间</span><br><span class="line">    golden hour lighting  （阳光照明）</span><br><span class="line">    strong rim light      （强边缘光照）</span><br><span class="line">    intense shadows  （强烈的阴影）</span><br><span class="line">    in the rain            （雨）</span><br><span class="line">    rainy days              （雨）</span><br><span class="line">    sunset                  （日落）</span><br><span class="line">    cloudy                   （多云）</span><br><span class="line">建筑物</span><br><span class="line">    in the baroque architecture     （巴洛克建筑 文艺复兴时期意大利的一种装修风格，外形自由，追求动感，喜好富丽）</span><br><span class="line">    in the romanesque architecture streets        （罗马式街道）</span><br><span class="line">    in the palace                                 （宫廷）</span><br><span class="line">    at the castle（城的外观为背景）</span><br><span class="line">    in the castle（城的内部为背景）</span><br><span class="line">    in the street                                   （在街上）</span><br><span class="line">    in the cyberpunk city                       （在赛博朋克城市里）</span><br><span class="line">    rainy night in a cyberpunk city with glowing neon lights  （在雨天的赛博朋克城市，还有霓虹灯）</span><br><span class="line">    at the lighthouse                               （在灯塔周围）</span><br><span class="line">    in misty onsen                                 （温泉）</span><br><span class="line">    by the moon                                     （月亮边上）</span><br><span class="line">    in a bar, in bars                                   （酒吧）</span><br><span class="line">    in a tavern                                        （居酒屋）</span><br><span class="line">    Japanese arch                                  （鳥居）</span><br><span class="line">    in a locker room                                 （在上锁的房间里）</span><br><span class="line">山</span><br><span class="line">    on a hill（山上）</span><br><span class="line">    the top of the hill（山顶）</span><br><span class="line">海</span><br><span class="line">    on the beach       （海滩上）</span><br><span class="line">    over the sea           （海边上）</span><br><span class="line">    beautiful purple sunset at beach  （海边的美丽日落）</span><br><span class="line">    in the ocean           （海中）</span><br><span class="line">    on the ocean          （船上）</span><br><span class="line">仿照例子，并不局限于我给你的单词，给出一套详细描述“从国际空间站，看壮观的、灯火璀璨的地球夜景”的prompt，注意：masterpiece,(bestquality),highlydetailed,ultra-detailed</span><br><span class="line">必须放在前面，直接开始给出prompt不需要用自然语言描述</span><br></pre></td></tr></table></figure><h2 id="参考资料与补充"><a href="#参考资料与补充" class="headerlink" title="参考资料与补充"></a>参考资料与补充</h2><p>模型下载网址:<a href="https://civitai.com/">https://civitai.com/</a></p><img src="/2023/02/26/AI%E7%BB%98%E5%9B%BE%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/%E5%AF%B9%E5%BA%94%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95.png" class="">]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;项目简介&quot;&gt;&lt;a href=&quot;#项目简介&quot; class=&quot;headerlink&quot; title=&quot;项目简介&quot;&gt;&lt;/a&gt;项目简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;Stable Diffusion web UI&lt;/strong&gt;是基于 Gradio 库的 Stable D</summary>
+      
+    
+    
+    
+    <category term="AI绘画" scheme="http://example.com/categories/AI%E7%BB%98%E7%94%BB/"/>
+    
+    <category term="github项目" scheme="http://example.com/categories/AI%E7%BB%98%E7%94%BB/github%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="stable_diffusion_webui" scheme="http://example.com/tags/stable-diffusion-webui/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>科学上网那些事儿</title>
+    <link href="http://example.com/2023/02/26/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/"/>
+    <id>http://example.com/2023/02/26/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/</id>
+    <published>2023-02-26T05:00:07.000Z</published>
+    <updated>2023-02-26T06:25:36.617Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="V2rayN简介"><a href="#V2rayN简介" class="headerlink" title="V2rayN简介"></a>V2rayN简介</h2><p>V2rayN客户端是一个基于V2ray 内核的windows客户端，它目前支持Xray内核，然后也可以手动更新核心和客户端的版本。下载即用，数据可视化（能看到你访问的网址）、上手也简单。</p><p>下载地址：<a href="https://github.com/2dust/v2rayN/releases/">https://github.com/2dust/v2rayN/releases/</a></p><h2 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h2><h3 id="启动V2rayN"><a href="#启动V2rayN" class="headerlink" title="启动V2rayN"></a>启动V2rayN</h3><p>下载解压安装后，双击运行V2rayN.exe</p><img src="/2023/02/26/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/V2rayN.exe%E8%BF%90%E8%A1%8C.png" class="" title="V2rayN.exe运行"><p>若没有弹出主界面，可以通过点击任务栏“反V”中的V2rayN图标，跳出主界面。如图示：</p><img src="/2023/02/26/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/V2rayN%E5%9B%BE%E6%A0%87.png" class=""><h3 id="三种导入节点的方式"><a href="#三种导入节点的方式" class="headerlink" title="三种导入节点的方式"></a>三种导入节点的方式</h3><ol><li>复制节点，点击一下主界面，ctrl + V粘贴</li><li>点击订阅设置，添加名字和url，并启用。</li><li>如果是二维码，我们就需要右击任务栏“反V”中的V2rayN图标，你就可以看到“扫描屏幕中的二维码”，完成导入</li></ol><h3 id="运行节点"><a href="#运行节点" class="headerlink" title="运行节点"></a>运行节点</h3><p>直接选中你想要的节点，再回车。</p><h3 id="其他细节"><a href="#其他细节" class="headerlink" title="其他细节"></a>其他细节</h3><p>其他类似设置全局、自动配置系统代理，你可以在下面找到。</p><img src="/2023/02/26/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/%E7%B3%BB%E7%BB%9F%E4%BB%A3%E7%90%86.png" class="" title="系统代理"><p>如果是新手，只是想简单使用，直接选中“自动配置系统代理”，然后运行节点即可。</p><h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><p>ctrl + A 全选</p><p>ctrl + R 测连接速度延迟(ms)</p><p>ctrl + T 测下载速度（MB&#x2F;s）</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;V2rayN简介&quot;&gt;&lt;a href=&quot;#V2rayN简介&quot; class=&quot;headerlink&quot; title=&quot;V2rayN简介&quot;&gt;&lt;/a&gt;V2rayN简介&lt;/h2&gt;&lt;p&gt;V2rayN客户端是一个基于V2ray 内核的windows客户端，它目前支持Xray内核，</summary>
+      
+    
+    
+    
+    <category term="科学上网" scheme="http://example.com/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/"/>
+    
+    
+    <category term="V2ray" scheme="http://example.com/tags/V2ray/"/>
+    
+    <category term="VPN" scheme="http://example.com/tags/VPN/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo_github_butterfly 博客搭建</title>
