@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-02-26T11:10:13.408Z</updated>
+  <updated>2023-02-27T15:16:36.424Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《人工智能现代方法》读书笔记</title>
+    <link href="http://example.com/2023/02/27/%E3%80%8A%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>http://example.com/2023/02/27/%E3%80%8A%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</id>
+    <published>2023-02-27T14:35:27.000Z</published>
+    <updated>2023-02-27T15:16:36.424Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>人工智能价值大，一万亿美元；影响大，李开复等众人公认；机会多，未来拥有无限可能。</p><p>什么是人工智能？书中有四种方法：</p><ol><li><p>类人类行为（图灵测试）：可以理解为，模仿人体器官运行机制，’嘴巴‘、’大脑‘、’眼睛与耳朵‘、’四肢‘（后两者与前者合称为“完全图灵测试”）</p></li><li><p>类人类思考（基于人类心理行为学研究）：研究的突破口在于利用人类心理与行为的精确对应，使之程序化，从而达到类人类的目的。</p></li><li><p>理性行为（逻辑与概率）：将人类行为分为确定事件和不确定事件，逻辑以处理确定事件，概率以处理不确定事件。</p></li><li><p>理性思考（感知、理解、预测并做出正确的行为）：智能体，标准模型；主流研究方向。</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;第一部分&quot;&gt;&lt;a href=&quot;#第一部分&quot; class=&quot;headerlink&quot; title=&quot;第一部分&quot;&gt;&lt;/a&gt;第一部分&lt;/h2&gt;&lt;p&gt;人工智能价值大，一万亿美元；影响大，李开复等众人公认；机会多，未来拥有无限可能。&lt;/p&gt;
+&lt;p&gt;什么是人工智能？书中有四种方</summary>
+      
+    
+    
+    
+    <category term="读书笔记" scheme="http://example.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="《人工智能现代方法》" scheme="http://example.com/tags/%E3%80%8A%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95%E3%80%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>报错总汇1</title>
@@ -139,9 +164,9 @@
     <category term="web前端" scheme="http://example.com/categories/web%E5%89%8D%E7%AB%AF/"/>
     
     
-    <category term="ssh" scheme="http://example.com/tags/ssh/"/>
-    
     <category term="博客" scheme="http://example.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+    <category term="ssh" scheme="http://example.com/tags/ssh/"/>
     
     <category term="github" scheme="http://example.com/tags/github/"/>
     
