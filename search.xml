@@ -65,8 +65,6 @@
       
       <categories>
           
-          <category> AI绘画 </category>
-          
           <category> github项目 </category>
           
       </categories>
@@ -75,6 +73,8 @@
         <tags>
             
             <tag> stable_diffusion_webui </tag>
+            
+            <tag> AI绘画 </tag>
             
         </tags>
       
@@ -126,9 +126,9 @@
       
         <tags>
             
-            <tag> 博客 </tag>
-            
             <tag> ssh </tag>
+            
+            <tag> 博客 </tag>
             
             <tag> github </tag>
             
