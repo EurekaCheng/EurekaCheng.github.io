@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>pytorch_GPU环境搭建</title>
+      <link href="/2023/03/20/pytorch-GPU%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <url>/2023/03/20/pytorch-GPU%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h2 id="总括"><a href="#总括" class="headerlink" title="总括"></a>总括</h2><p><em><strong>总体过程是通过设备管理器查看显卡型号，去<a href="https://www.nvidia.cn/geforce/drivers/">NVIDIA GeForce 驱动程序 - N 卡驱动 | NVIDIA</a>下载相应显卡驱动，<code>nvidia-smi</code>查看CUDA最高可安装版本，安装对应CUDA和CUDNN(下文有网址)，一般会再安装Anaconda用于环境管理（记得安装时勾选添加环境变量），创建pytorch环境（注意python版本），激活环境在其中安装相应的torch版本，最后验证是否成功</strong></em></p><h2 id="官网安装"><a href="#官网安装" class="headerlink" title="官网安装"></a>官网安装</h2><p>直接去<a href="https://pytorch.org/get-started/previous-versions/">pytorch官网</a><code>previous Pytorch Versions</code>里面已经标注好<code>pytorch</code>以及对应的<code>cuda</code>版本，最新版本首页就是。</p><img src="/2023/03/20/pytorch-GPU%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%AE%98%E7%BD%91.png" class=""><h2 id="更换国内源-x3D-x3D-一定要删掉defaults-x3D-x3D"><a href="#更换国内源-x3D-x3D-一定要删掉defaults-x3D-x3D" class="headerlink" title="更换国内源 &#x3D;&#x3D;一定要删掉defaults&#x3D;&#x3D;"></a>更换国内源 &#x3D;&#x3D;一定要删掉defaults&#x3D;&#x3D;</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">windows下：</span><br><span class="line"></span><br><span class="line">清华源</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge </span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/msys2/</span><br><span class="line"></span><br><span class="line"># 设置搜索时显示通道地址</span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line">pytorch配置</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br><span class="line"></span><br><span class="line">中科大源</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/msys2/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/bioconda/</span><br><span class="line">conda config --add channels https://mirrors.ustc.edu.cn/anaconda/cloud/menpo/</span><br><span class="line">conda config --set show_channel_urls yes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">linux下：</span><br><span class="line">将以上配置文件写在~/.condarc中</span><br><span class="line">vim ~/.condarc</span><br><span class="line"></span><br><span class="line">channels:</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/</span><br><span class="line">  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">  - defaults</span><br><span class="line">show_channel_urls: true</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="CUDA与CUDnn安装全过程（多版本）"><a href="#CUDA与CUDnn安装全过程（多版本）" class="headerlink" title="CUDA与CUDnn安装全过程（多版本）"></a>CUDA与CUDnn安装全过程（多版本）</h2><p>CUDA安装链接：<a href="https://developer.nvidia.com/cuda-toolkit-archive">https://developer.nvidia.com/cuda-toolkit-archive</a></p><p>多版本安装时需注意，如果安装的版本比之前的都要高（比如电脑已经有了10.2，现在要装11.3），那么就需要勾选安装全部，反之只需要勾选安装CUDA的那个选项就好。</p><p>安装过程一共涉及到两次安装路径的选择，第一次选择默认（这样不用自己手动添加环境变量，似乎更改后系统仍会自行改回），第二次可以任意更改为自己方便的路径。</p><p>CUDnn安装链接：<a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></p><p>这里面有<code>bin</code> <code>include</code> <code>lib</code>三个文件夹，将对应的文件里的内容复制到你第二次填写安装路径，对应的文件就好。（比如我第二次选择CUDA的安装路径是F:\CUDA10.2,那么我就需要将CUDnn里的<code>bin</code>等文件复制到F:\CUDA10.2\bin中）</p><p>&#x3D;&#x3D;检测安装是否成功&#x3D;&#x3D;</p><img src="/2023/03/20/pytorch-GPU%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F.png" class=""><p>&#x3D;&#x3D;不同版本CUDA的切换&#x3D;&#x3D; </p><p>只需要更改环境变量中PATH的上下位置，所需CUDA版本的位置在上，则系统就会调用该版本，就实现了版本的切换。</p><img src="/2023/03/20/pytorch-GPU%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%88%87%E6%8D%A2.png" class=""><h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">##验证是否成功</span><br><span class="line">import torch</span><br><span class="line">print(torch.__version__)                  #torch版本</span><br><span class="line">print(torch.cuda.is_available())          #cuda是否有用</span><br><span class="line">print(torch.backends.cudnn.is_available())#cudnn是否有用</span><br><span class="line">print(torch.cuda_version)                 #当前cuda版本</span><br><span class="line">print(torch.backends.cudnn.version())     #当前cudnn版本</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CUDA与CUDnn安装全过程（多版本）</title>
       <link href="/2023/03/02/CUDA%E4%B8%8ECUDnn%E5%AE%89%E8%A3%85%E5%85%A8%E8%BF%87%E7%A8%8B%EF%BC%88%E5%A4%9A%E7%89%88%E6%9C%AC%EF%BC%89/"/>
       <url>/2023/03/02/CUDA%E4%B8%8ECUDnn%E5%AE%89%E8%A3%85%E5%85%A8%E8%BF%87%E7%A8%8B%EF%BC%88%E5%A4%9A%E7%89%88%E6%9C%AC%EF%BC%89/</url>
