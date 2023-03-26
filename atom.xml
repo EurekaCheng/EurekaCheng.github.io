@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-03-24T12:27:18.210Z</updated>
+  <updated>2023-03-26T10:54:49.724Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python常用函数</title>
+    <link href="http://example.com/2023/03/26/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"/>
+    <id>http://example.com/2023/03/26/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</id>
+    <published>2023-03-26T10:46:11.000Z</published>
+    <updated>2023-03-26T10:54:49.724Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Python常用函数"><a href="#Python常用函数" class="headerlink" title="Python常用函数"></a>Python常用函数</h2><h2 id="filter-函数"><a href="#filter-函数" class="headerlink" title="filter()函数"></a>filter()函数</h2><p><em><strong>过滤用的，对象可以是几何、列表、元组，两个参数：前者过滤条件后者待过滤对象</strong></em></p><p><code>filter()</code>函数是Python内置函数之一，它用于从可迭代对象中过滤出满足特定条件的元素，并将它们组成一个新的迭代器返回。</p><p><code>filter()</code>函数的基本语法如下：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">filter</span>(function, iterable)</span><br></pre></td></tr></table></figure><p>其中，<code>function</code>是一个函数，用于对<code>iterable</code>中的每个元素进行判断，如果返回值为<code>True</code>，则将该元素包含在返回的迭代器中。<code>iterable</code>表示需要过滤的可迭代对象，如列表、元组、集合等。</p><p>下面是一个简单的例子，演示如何使用<code>filter()</code>函数从列表中过滤出偶数：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">even_numbers = <span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span>, numbers)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(even_numbers))  <span class="comment"># 输出 [2, 4, 6, 8]</span></span><br></pre></td></tr></table></figure><p>在上面的代码中，我们使用<code>filter()</code>函数和Lambda函数从<code>numbers</code>列表中过滤出偶数，并将它们保存在新的变量<code>even_numbers</code>中。由于<code>filter()</code>函数返回的是一个迭代器，因此我们将它转换成列表并打印出来。</p><p>除了Lambda函数之外，我们还可以使用命名函数作为<code>function</code>参数传递给<code>filter()</code>函数。例如，下面的代码使用一个命名函数从字符串列表中过滤出长度大于等于5的字符串：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fruits = [<span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;kiwi&#x27;</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_long_string</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(s) &gt;= <span class="number">5</span></span><br><span class="line">long_strings = <span class="built_in">filter</span>(is_long_string, fruits)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(long_strings))  <span class="comment"># 输出 [&#x27;banana&#x27;, &#x27;orange&#x27;]</span></span><br></pre></td></tr></table></figure><p>在上面的代码中，我们定义了一个名为<code>is_long_string()</code>的函数，它接受一个字符串作为参数，并返回该字符串的长度是否大于等于5。然后我们将该函数传递给<code>filter()</code>函数，并从<code>fruits</code>列表中过滤出长度大于等于5的字符串。</p><p><code>filter()</code>函数是一个非常有用的函数，它可以帮助我们从可迭代对象中过滤出特定条件的元素，从而简化我们的代码。</p><h2 id="sorted-和sort-函数"><a href="#sorted-和sort-函数" class="headerlink" title="sorted()和sort()函数"></a>sorted()和sort()函数</h2><p>区别：</p><ol><li>修改原始对象</li></ol><p><code>sort()</code>函数是一个列表方法，它可以<strong>修改</strong>原始列表并将其按照指定方式进行排序。而<code>sorted()</code>函数是一个内置函数，它<strong>不会修改</strong>原始对象，而是返回一个新的已排序的列表。</p><ol><li>返回值</li></ol><p><code>sort()</code>函数<strong>不会返回任何值</strong>，它只会将原始列表排序。而<code>sorted()</code>函数会<strong>返回一个新的已排序的列表</strong>。</p><ol><li>可排序对象</li></ol><p><code>sort()</code>函数只能用于<strong>列表对象</strong>，因为它是一个列表方法。而<code>sorted()</code>函数可以用于<strong>任何可迭代对象，如元组、集合、字符串等</strong>。</p><ol><li>参数</li></ol><p><code>sort()</code>函数只接受<strong>两个</strong>可选参数：<code>key</code>和<code>reverse</code>。其中，<code>key</code>参数用于指定排序时使用的函数，<code>reverse</code>参数用于控制排序方式。而<code>sorted()</code>函数接受<strong>三个</strong>参数：<code>iterable</code>、<code>key</code>和<code>reverse</code>，其中<code>iterable</code>表示需要排序的可迭代对象。<strong>默认降序，True为升序</strong></p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">4</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">5</span>]</span><br><span class="line"><span class="comment"># 使用sort()函数排序</span></span><br><span class="line">numbers.sort()</span><br><span class="line"><span class="built_in">print</span>(numbers)  <span class="comment"># 输出 [1, 2, 4, 5, 7, 9]</span></span><br><span class="line"></span><br><span class="line">numbers = [<span class="number">4</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">5</span>]</span><br><span class="line"><span class="comment"># 使用sorted()函数排序</span></span><br><span class="line">sorted_numbers = <span class="built_in">sorted</span>(numbers)</span><br><span class="line"><span class="built_in">print</span>(sorted_numbers)  <span class="comment"># 输出 [1, 2, 4, 5, 7, 9]</span></span><br><span class="line"><span class="built_in">print</span>(numbers)  <span class="comment"># 输出 [4, 2, 7, 1, 9, 5]</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Python常用函数&quot;&gt;&lt;a href=&quot;#Python常用函数&quot; class=&quot;headerlink&quot; title=&quot;Python常用函数&quot;&gt;&lt;/a&gt;Python常用函数&lt;/h2&gt;&lt;h2 id=&quot;filter-函数&quot;&gt;&lt;a href=&quot;#filter-函数&quot; c</summary>
+      
+    
+    
+    
+    <category term="编程语言" scheme="http://example.com/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="Python" scheme="http://example.com/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>实用小知识</title>
