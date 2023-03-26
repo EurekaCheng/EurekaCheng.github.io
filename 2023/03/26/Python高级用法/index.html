@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Python高级用法 | Eureka's World</title><meta name="keywords" content="Python"><meta name="author" content="Eureka Cheng"><meta name="copyright" content="Eureka Cheng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python高级用法Python 作为一门强大的编程语言，具有许多高级用法。以下是一些常见的高级用法：  生成器表达式和生成器函数：生成器允许按需产生一个序列，而不是一次性将整个序列加载到内存中。生成器表达式和生成器函数都是创建生成器的方式，它们可以在循环中用于处理大型数据集，而无需将整个数据集存储在内存中。 装饰器：装饰器是一种Python语法，用于修改或增强函数或类的功能。装饰器通常用于AOP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python高级用法">
+<meta property="og:url" content="http://example.com/2023/03/26/Python%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/index.html">
+<meta property="og:site_name" content="Eureka&#39;s World">
+<meta property="og:description" content="Python高级用法Python 作为一门强大的编程语言，具有许多高级用法。以下是一些常见的高级用法：  生成器表达式和生成器函数：生成器允许按需产生一个序列，而不是一次性将整个序列加载到内存中。生成器表达式和生成器函数都是创建生成器的方式，它们可以在循环中用于处理大型数据集，而无需将整个数据集存储在内存中。 装饰器：装饰器是一种Python语法，用于修改或增强函数或类的功能。装饰器通常用于AOP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/fly12.jpg">
+<meta property="article:published_time" content="2023-03-26T10:45:51.000Z">
+<meta property="article:modified_time" content="2023-03-26T11:01:16.483Z">
+<meta property="article:author" content="Eureka Cheng">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/fly12.jpg"><link rel="shortcut icon" href="/img/QQ.jpg"><link rel="canonical" href="http://example.com/2023/03/26/Python%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python高级用法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-26 19:01:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div class="aplayer" data-id="7185185101" data-server="netease" data-type="playlist" data-fixed="true" data-listFolded="false" data-order="random" data-preload="auto"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lete114/CDN/music/APlayer/APlayer.min.css"><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/music/APlayer/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Eureka's World" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/QQ.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/fly12.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Eureka's World</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python高级用法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-26T10:45:51.000Z" title="发表于 2023-03-26 18:45:51">2023-03-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-26T11:01:16.483Z" title="更新于 2023-03-26 19:01:16">2023-03-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python高级用法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Python高级用法"><a href="#Python高级用法" class="headerlink" title="Python高级用法"></a>Python高级用法</h2><p>Python 作为一门强大的编程语言，具有许多高级用法。以下是一些常见的高级用法：</p>
+<ol>
+<li>生成器表达式和生成器函数：生成器允许按需产生一个序列，而不是一次性将整个序列加载到内存中。生成器表达式和生成器函数都是创建生成器的方式，它们可以在循环中用于处理大型数据集，而无需将整个数据集存储在内存中。</li>
+<li>装饰器：装饰器是一种Python语法，用于修改或增强函数或类的功能。装饰器通常用于AOP（面向切面编程），其中在函数或方法调用前后执行其他代码。</li>
+<li>上下文管理器：上下文管理器是Python的一种语法，用于管理资源（如文件、网络连接等）。使用with语句可以自动管理上下文，从而确保资源在使用完后被正确释放。</li>
+<li>多线程和多进程：Python允许同时执行多个线程和进程，从而提高程序的并发性和性能。使用多线程和多进程可以充分利用多核处理器，从而加快计算速度。</li>
+<li>正则表达式：正则表达式是一种强大的文本处理工具，可以用于查找、替换和解析文本。Python内置了re模块，用于支持正则表达式操作。</li>
+<li>面向对象编程：Python是一种面向对象编程语言，支持类、继承、多态等特性。使用面向对象编程可以将程序分解为更小的、易于管理的组件，从而提高代码的可读性和可维护性。</li>
+<li>Lambda表达式：Lambda表达式是一种匿名函数，可以用于简化代码并增强可读性。Lambda表达式通常用于函数式编程，其中函数是一等公民，可以作为参数传递给其他函数。</li>
+<li>列表推导式和字典推导式：推导式是一种简洁的语法，用于快速创建列表、字典等数据结构。列表推导式和字典推导式可以用于生成符合特定条件的数据结构。</li>
+</ol>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p>yield是Python中的一个关键字，用于定义生成器函数。生成器是一种特殊的函数，它不会像普通函数一样一次性返回所有结果，而是可以根据需要<strong>逐步生成</strong>结果。这种逐步生成的过程可以大大减少内存占用，特别是在处理大数据集时非常有用。</p>
+<p>下面是一个使用yield定义生成器函数的示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">square_numbers</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">yield</span> n*n</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用生成器函数</span></span><br><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="keyword">for</span> square <span class="keyword">in</span> square_numbers(numbers):</span><br><span class="line">    <span class="built_in">print</span>(square)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码定义了一个名为square_numbers的生成器函数，它将一个列表中的数字平方后逐个生成结果。在使用生成器函数时，可以通过for循环来逐个获取结果。注意，这里的生成器函数不会一次性返回所有结果，而是根据需要逐步生成结果。</p>
+<p>除了<strong>使用for循环</strong>来逐个获取生成器函数的结果之外，还可以使用<strong>next()函数</strong>来获取下一个结果，例如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">square_numbers</span>(<span class="params">numbers</span>):</span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="keyword">yield</span> n*n</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用生成器函数</span></span><br><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">squares = square_numbers(numbers)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(squares)) <span class="comment"># 输出：1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(squares)) <span class="comment"># 输出：4</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(squares)) <span class="comment"># 输出：9</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(squares)) <span class="comment"># 输出：16</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(squares)) <span class="comment"># 输出：25</span></span><br></pre></td></tr></table></figure>
+
+<p>这里使用next()函数逐个获取生成器函数的结果，当没有更多结果时，会抛出StopIteration异常。</p>
+<p>常用示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成器函数示例</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fibonacci</span>():</span><br><span class="line">    a, b = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> a</span><br><span class="line">        a, b = b, a + b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用生成器函数</span></span><br><span class="line"><span class="keyword">for</span> i, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(fibonacci()):</span><br><span class="line">    <span class="keyword">if</span> i &gt;= <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<p>总之，yield是Python中非常有用的一个关键字，它可以用于定义生成器函数，逐步生成结果，减少内存占用。</p>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>Lambda表达式是一种匿名函数，可以在需要函数对象的任何地方使用它。它的语法形式是<code>lambda arguments: expression</code>，其中arguments是函数的参数，expression是函数的返回值。Lambda函数可以包含任意数量的参数，但只能有一个表达式。</p>
+<p>下面是一个简单的Lambda函数示例，它接受两个参数并返回它们的和：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span> = <span class="keyword">lambda</span> x, y: x + y</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sum</span>(<span class="number">3</span>, <span class="number">4</span>))  <span class="comment"># 输出 7</span></span><br></pre></td></tr></table></figure>
+
+<p>其他示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">items = &#123;<span class="string">&#x27;apple&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;banana&#x27;</span>: <span class="number">5</span>, <span class="string">&#x27;orange&#x27;</span>: <span class="number">20</span>&#125;</span><br><span class="line">sorted_items = <span class="built_in">sorted</span>(items.items(), key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(sorted_items)  <span class="comment"># 输出 [(&#x27;banana&#x27;, 5), (&#x27;apple&#x27;, 10), (&#x27;orange&#x27;, 20)]</span></span><br><span class="line"></span><br><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">odd_numbers = <span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> != <span class="number">0</span>, numbers))</span><br><span class="line"><span class="built_in">print</span>(odd_numbers)  <span class="comment"># 输出 [1, 3, 5, 7, 9]</span></span><br><span class="line"></span><br><span class="line">numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line">squares = [x**<span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> numbers <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(squares)  <span class="comment"># 输出 [4, 16, 36, 64]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Os-Module"><a href="#Os-Module" class="headerlink" title="Os Module"></a>Os Module</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">os.name：返回导入的操作系统依赖模块的名称。</span><br><span class="line"></span><br><span class="line">os.getcwd()：返回当前工作目录。</span><br><span class="line"></span><br><span class="line">os.chdir(path)：将当前工作目录更改为给定路径。</span><br><span class="line"></span><br><span class="line">os.listdir(path=&quot;.&quot;): 返回路径中所有文件和目录的列表。</span><br><span class="line"></span><br><span class="line">os.mkdir(path)：使用给定的路径创建一个新目录。</span><br><span class="line"></span><br><span class="line">os.makedirs(path)：使用给定路径创建目录及其所有父目录。</span><br><span class="line"></span><br><span class="line">os.rmdir(path)：删除具有给定路径的目录。</span><br><span class="line"></span><br><span class="line">os.remove(path)：删除具有给定路径的文件。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">##os.path.abspath(path)：返回路径名的规范化绝对化版本。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os </span><br><span class="line"><span class="comment"># 获取当前文件的绝对路径</span></span><br><span class="line">absolute_path = os.path.abspath(__file__)</span><br><span class="line"><span class="built_in">print</span>(absolute_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前工作目录的绝对路径</span></span><br><span class="line">cwd_absolute_path = os.path.abspath(<span class="string">&#x27;.&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cwd_absolute_path)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">##os.path.join(path1[, path2[, ...]])：连接两个或多个路径组件，在它们之间添加分隔符。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment"># 示例1</span></span><br><span class="line">path1 = <span class="string">&#x27;/home/user&#x27;</span></span><br><span class="line">path2 = <span class="string">&#x27;documents&#x27;</span></span><br><span class="line">path3 = <span class="string">&#x27;example.txt&#x27;</span></span><br><span class="line">full_path = os.path.join(path1, path2, path3)</span><br><span class="line"><span class="built_in">print</span>(full_path)    <span class="comment"># /home/user/documents/example.txt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例2</span></span><br><span class="line">file_name = <span class="string">&#x27;config.txt&#x27;</span></span><br><span class="line">config_dir = os.path.join(os.environ[<span class="string">&#x27;HOME&#x27;</span>], <span class="string">&#x27;.config&#x27;</span>, <span class="string">&#x27;myapp&#x27;</span>)</span><br><span class="line">full_path = os.path.join(config_dir, file_name)</span><br><span class="line"><span class="built_in">print</span>(full_path)    <span class="comment"># /home/user/.config/myapp/config.txt</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Eureka Cheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/26/Python%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/">http://example.com/2023/03/26/Python高级用法/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Eureka's World</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"><div class="social-share" data-image="/img/fly12.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/26/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly13.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python常用函数</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/23/%E5%AE%9E%E7%94%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly6.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">实用小知识</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/26/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="Python常用函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-26</div><div class="title">Python常用函数</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">Python高级用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">Lambda表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Os-Module"><span class="toc-number">4.</span> <span class="toc-text">Os Module</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Eureka Cheng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎您的到来</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Bwz3dUPrUtqxjRL22TRz4VH0-gzGzoHsz',
+      appKey: '6yAEOtkjz3LJjO8OpeWp1bPk',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script type="text/javascript" src="/js/fairyDustCursor.js"></script><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'messageboard/community',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
