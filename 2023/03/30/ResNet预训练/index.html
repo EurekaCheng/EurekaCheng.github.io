@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>ResNet预训练 | Eureka's World</title><meta name="keywords" content="pytorch"><meta name="author" content="Eureka Cheng"><meta name="copyright" content="Eureka Cheng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="由.ipynb文件转化而成 %matplotlib inline    from torchvision import models  首字母大写的名称对应是实现了很多流行模型的python类，它们输入和输出之间操作的编排不同；首字母小写的名称是指用预定义的层和单元数实例化模型的函数，有时使用不同的参数集 dir(models)    [&amp;#x27;AlexNet&amp;#x27;, &amp;#x27;Den">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ResNet预训练">
+<meta property="og:url" content="http://example.com/2023/03/30/ResNet%E9%A2%84%E8%AE%AD%E7%BB%83/index.html">
+<meta property="og:site_name" content="Eureka&#39;s World">
+<meta property="og:description" content="由.ipynb文件转化而成 %matplotlib inline    from torchvision import models  首字母大写的名称对应是实现了很多流行模型的python类，它们输入和输出之间操作的编排不同；首字母小写的名称是指用预定义的层和单元数实例化模型的函数，有时使用不同的参数集 dir(models)    [&amp;#x27;AlexNet&amp;#x27;, &amp;#x27;Den">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/sea101.jpg">
+<meta property="article:published_time" content="2023-03-30T08:44:53.000Z">
+<meta property="article:modified_time" content="2023-03-30T09:07:51.734Z">
+<meta property="article:author" content="Eureka Cheng">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/sea101.jpg"><link rel="shortcut icon" href="/img/QQ.jpg"><link rel="canonical" href="http://example.com/2023/03/30/ResNet%E9%A2%84%E8%AE%AD%E7%BB%83/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ResNet预训练',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-03-30 17:07:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><div class="aplayer" data-id="7185185101" data-server="netease" data-type="playlist" data-fixed="true" data-listFolded="false" data-order="random" data-preload="auto"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lete114/CDN/music/APlayer/APlayer.min.css"><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/music/APlayer/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@1.2.0/dist/Meting.min.js"></script><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 6.1.0"><link rel="alternate" href="/atom.xml" title="Eureka's World" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/QQ.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/sea101.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Eureka's World</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ResNet预训练</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-30T08:44:53.000Z" title="发表于 2023-03-30 16:44:53">2023-03-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-30T09:07:51.734Z" title="更新于 2023-03-30 17:07:51">2023-03-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ResNet预训练"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><em><strong>由.ipynb文件转化而成</strong></em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">%matplotlib inline</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> models</span><br></pre></td></tr></table></figure>
+
+<p><strong>首字母大写的名称对应是实现了很多流行模型的python类，它们输入和输出之间操作的编排不同；首字母小写的名称是指用预定义的层和单元数实例化模型的函数，有时使用不同的参数集</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">dir</span>(models)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[&#x27;AlexNet&#x27;,</span><br><span class="line"> &#x27;DenseNet&#x27;,</span><br><span class="line"> &#x27;EfficientNet&#x27;,</span><br><span class="line"> &#x27;GoogLeNet&#x27;,</span><br><span class="line"> &#x27;GoogLeNetOutputs&#x27;,</span><br><span class="line"> &#x27;Inception3&#x27;,</span><br><span class="line"> &#x27;InceptionOutputs&#x27;,</span><br><span class="line"> &#x27;MNASNet&#x27;,</span><br><span class="line"> &#x27;MobileNetV2&#x27;,</span><br><span class="line"> &#x27;MobileNetV3&#x27;,</span><br><span class="line"> &#x27;RegNet&#x27;,</span><br><span class="line"> &#x27;ResNet&#x27;,</span><br><span class="line"> &#x27;ShuffleNetV2&#x27;,</span><br><span class="line"> &#x27;SqueezeNet&#x27;,</span><br><span class="line"> &#x27;VGG&#x27;,</span><br><span class="line"> &#x27;_GoogLeNetOutputs&#x27;,</span><br><span class="line"> &#x27;_InceptionOutputs&#x27;,</span><br><span class="line"> &#x27;__builtins__&#x27;,</span><br><span class="line"> &#x27;__cached__&#x27;,</span><br><span class="line"> &#x27;__doc__&#x27;,</span><br><span class="line"> &#x27;__file__&#x27;,</span><br><span class="line"> &#x27;__loader__&#x27;,</span><br><span class="line"> &#x27;__name__&#x27;,</span><br><span class="line"> &#x27;__package__&#x27;,</span><br><span class="line"> &#x27;__path__&#x27;,</span><br><span class="line"> &#x27;__spec__&#x27;,</span><br><span class="line"> &#x27;_utils&#x27;,</span><br><span class="line"> &#x27;alexnet&#x27;,</span><br><span class="line"> &#x27;densenet&#x27;,</span><br><span class="line"> &#x27;densenet121&#x27;,</span><br><span class="line"> &#x27;densenet161&#x27;,</span><br><span class="line"> &#x27;densenet169&#x27;,</span><br><span class="line"> &#x27;densenet201&#x27;,</span><br><span class="line"> &#x27;detection&#x27;,</span><br><span class="line"> &#x27;efficientnet&#x27;,</span><br><span class="line"> &#x27;efficientnet_b0&#x27;,</span><br><span class="line"> &#x27;efficientnet_b1&#x27;,</span><br><span class="line"> &#x27;efficientnet_b2&#x27;,</span><br><span class="line"> &#x27;efficientnet_b3&#x27;,</span><br><span class="line"> &#x27;efficientnet_b4&#x27;,</span><br><span class="line"> &#x27;efficientnet_b5&#x27;,</span><br><span class="line"> &#x27;efficientnet_b6&#x27;,</span><br><span class="line"> &#x27;efficientnet_b7&#x27;,</span><br><span class="line"> &#x27;feature_extraction&#x27;,</span><br><span class="line"> &#x27;googlenet&#x27;,</span><br><span class="line"> &#x27;inception&#x27;,</span><br><span class="line"> &#x27;inception_v3&#x27;,</span><br><span class="line"> &#x27;mnasnet&#x27;,</span><br><span class="line"> &#x27;mnasnet0_5&#x27;,</span><br><span class="line"> &#x27;mnasnet0_75&#x27;,</span><br><span class="line"> &#x27;mnasnet1_0&#x27;,</span><br><span class="line"> &#x27;mnasnet1_3&#x27;,</span><br><span class="line"> &#x27;mobilenet&#x27;,</span><br><span class="line"> &#x27;mobilenet_v2&#x27;,</span><br><span class="line"> &#x27;mobilenet_v3_large&#x27;,</span><br><span class="line"> &#x27;mobilenet_v3_small&#x27;,</span><br><span class="line"> &#x27;mobilenetv2&#x27;,</span><br><span class="line"> &#x27;mobilenetv3&#x27;,</span><br><span class="line"> &#x27;quantization&#x27;,</span><br><span class="line"> &#x27;regnet&#x27;,</span><br><span class="line"> &#x27;regnet_x_16gf&#x27;,</span><br><span class="line"> &#x27;regnet_x_1_6gf&#x27;,</span><br><span class="line"> &#x27;regnet_x_32gf&#x27;,</span><br><span class="line"> &#x27;regnet_x_3_2gf&#x27;,</span><br><span class="line"> &#x27;regnet_x_400mf&#x27;,</span><br><span class="line"> &#x27;regnet_x_800mf&#x27;,</span><br><span class="line"> &#x27;regnet_x_8gf&#x27;,</span><br><span class="line"> &#x27;regnet_y_16gf&#x27;,</span><br><span class="line"> &#x27;regnet_y_1_6gf&#x27;,</span><br><span class="line"> &#x27;regnet_y_32gf&#x27;,</span><br><span class="line"> &#x27;regnet_y_3_2gf&#x27;,</span><br><span class="line"> &#x27;regnet_y_400mf&#x27;,</span><br><span class="line"> &#x27;regnet_y_800mf&#x27;,</span><br><span class="line"> &#x27;regnet_y_8gf&#x27;,</span><br><span class="line"> &#x27;resnet&#x27;,</span><br><span class="line"> &#x27;resnet101&#x27;,</span><br><span class="line"> &#x27;resnet152&#x27;,</span><br><span class="line"> &#x27;resnet18&#x27;,</span><br><span class="line"> &#x27;resnet34&#x27;,</span><br><span class="line"> &#x27;resnet50&#x27;,</span><br><span class="line"> &#x27;resnext101_32x8d&#x27;,</span><br><span class="line"> &#x27;resnext50_32x4d&#x27;,</span><br><span class="line"> &#x27;segmentation&#x27;,</span><br><span class="line"> &#x27;shufflenet_v2_x0_5&#x27;,</span><br><span class="line"> &#x27;shufflenet_v2_x1_0&#x27;,</span><br><span class="line"> &#x27;shufflenet_v2_x1_5&#x27;,</span><br><span class="line"> &#x27;shufflenet_v2_x2_0&#x27;,</span><br><span class="line"> &#x27;shufflenetv2&#x27;,</span><br><span class="line"> &#x27;squeezenet&#x27;,</span><br><span class="line"> &#x27;squeezenet1_0&#x27;,</span><br><span class="line"> &#x27;squeezenet1_1&#x27;,</span><br><span class="line"> &#x27;vgg&#x27;,</span><br><span class="line"> &#x27;vgg11&#x27;,</span><br><span class="line"> &#x27;vgg11_bn&#x27;,</span><br><span class="line"> &#x27;vgg13&#x27;,</span><br><span class="line"> &#x27;vgg13_bn&#x27;,</span><br><span class="line"> &#x27;vgg16&#x27;,</span><br><span class="line"> &#x27;vgg16_bn&#x27;,</span><br><span class="line"> &#x27;vgg19&#x27;,</span><br><span class="line"> &#x27;vgg19_bn&#x27;,</span><br><span class="line"> &#x27;video&#x27;,</span><br><span class="line"> &#x27;wide_resnet101_2&#x27;,</span><br><span class="line"> &#x27;wide_resnet50_2&#x27;]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>alexnet是一个可以运行AlexNet架构的对象，但是如果我们直接使用<code>output=alexnet(input)</code>运行正向传播，那将会使用整个网络的数据来产生输出。由于网络没有初始化，即它的权重没有经过训练，产生的输出毫无意义。所以，我们可以选择性地下载和加载预训练好的权重。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">alexnet = models.AlexNet()</span><br></pre></td></tr></table></figure>
+
+<p><strong>这里使用函数(首字母小写的)，没什么必要，只是为了方便使用与预训练好的网络的构建方式相匹配的层和单元数来实例化模型</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">resnet = models.resnet101(pretrained=<span class="literal">True</span>)<span class="comment">#pretrained=True，加载训练过的权重</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">resnet</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ResNet(</span><br><span class="line">  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)</span><br><span class="line">  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (relu): ReLU(inplace=True)</span><br><span class="line">  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)</span><br><span class="line">  (layer1): Sequential(</span><br><span class="line">    (0): Bottleneck(</span><br><span class="line">      (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)</span><br><span class="line">  ....</span><br><span class="line">  ....</span><br><span class="line">  )</span><br><span class="line">  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))</span><br><span class="line">  (fc): Linear(in_features=2048, out_features=1000, bias=True)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>图像预处理，大小、颜色等，transforms提供了转换操作，是我们可以快速定义基本预处理函数的管道</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">preprocess = transforms.Compose([transforms.Resize(<span class="number">256</span>), </span><br><span class="line">                                transforms.CenterCrop(<span class="number">224</span>), </span><br><span class="line">                                transforms.ToTensor(), </span><br><span class="line">                                transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>], std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">r&quot;H:\Text\data\squirrel_cls.jpg&quot;</span>)</span><br><span class="line">img</span><br></pre></td></tr></table></figure>
+
+
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/2023/03/30/ResNet%E9%A2%84%E8%AE%AD%E7%BB%83/squirrel_cls.jpg" class="">
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">img_t = preprocess(img)</span><br><span class="line">img_t.shape</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">torch.Size([3, 224, 224])</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">batch_t = torch.unsqueeze(img_t, <span class="number">0</span>)</span><br><span class="line">batch_t.shape <span class="comment">##(N,C, H, W)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">torch.Size([1, 3, 224, 224])</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">resnet.<span class="built_in">eval</span>()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ResNet(</span><br><span class="line">  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)</span><br><span class="line">  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (relu): ReLU(inplace=True)</span><br><span class="line">  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)</span><br><span class="line">  (layer1): Sequential(</span><br><span class="line">    (0): Bottleneck(</span><br><span class="line">      (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)</span><br><span class="line">      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)</span><br><span class="line">.......</span><br><span class="line">.......</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line">  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))</span><br><span class="line">  (fc): Linear(in_features=2048, out_features=1000, bias=True)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">out = resnet(batch_t)</span><br><span class="line">out.size(), out</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># out_t = (out.data.squeeze() + 1.0) / 2.0</span></span><br><span class="line"><span class="comment"># out_img = transforms.ToPILImage()(out_t)</span></span><br><span class="line"><span class="comment"># out_img 报错：ValueError: pic should be 2/3 dimensional. Got 1 dimensions.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ##opencv转换图像</span></span><br><span class="line"><span class="comment"># import numpy</span></span><br><span class="line"><span class="comment"># import cv2</span></span><br><span class="line"><span class="comment"># out_np = out.data.squeeze().cpu().numpy()</span></span><br><span class="line"><span class="comment"># # 将灰度图转换为BGR格式的彩色图</span></span><br><span class="line"><span class="comment"># out_img = cv2.cvtColor(out_np, cv2.COLOR_GRAY2BGR)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># # 显示图像</span></span><br><span class="line"><span class="comment"># cv2.imshow(&#x27;Output Image&#x27;, out_img)</span></span><br><span class="line"><span class="comment"># cv2.waitKey(0)</span></span><br><span class="line"><span class="comment"># cv2.destroyAllWindows()</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在Python中，.strip()方法用于从字符串中删除前导或尾随的空格字符（例如空格、制表符或换行符）。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">r&quot;G:\workspace\dlwpt-code\data\p1ch2\imagenet_classes.txt&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    labels = [line.strip() <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">labels</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[&#x27;tench, Tinca tinca&#x27;,</span><br><span class="line"> &#x27;goldfish, Carassius auratus&#x27;,</span><br><span class="line"> &#x27;great white shark, white shark, man-eater, man-eating shark, Carcharodon carcharias&#x27;,</span><br><span class="line"> &#x27;tiger shark, Galeocerdo cuvieri&#x27;,</span><br><span class="line"> &#x27;hammerhead, hammerhead shark&#x27;,</span><br><span class="line"> &#x27;electric ray, crampfish, numbfish, torpedo&#x27;,</span><br><span class="line"> &#x27;stingray&#x27;,</span><br><span class="line"> &#x27;cock&#x27;,</span><br><span class="line"> &#x27;hen&#x27;,</span><br><span class="line"> &#x27;ostrich, Struthio camelus&#x27;,</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"> &#x27;hen-of-the-woods, hen of the woods, Polyporus frondosus, Grifola frondosa&#x27;,</span><br><span class="line"> &#x27;bolete&#x27;,</span><br><span class="line"> &#x27;ear, spike, capitulum&#x27;,</span><br><span class="line"> &#x27;toilet tissue, toilet paper, bathroom tissue&#x27;]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>torch.max(input, dim&#x3D;None, keepdim&#x3D;False, out&#x3D;None)参数对应输入、列行、输出是否降维、输出位置；<br> 函数返回一个元组，其中第一个元素是张量中的最大值，第二个元素是最大值所在的索引。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">_, index = torch.<span class="built_in">max</span>(out, <span class="number">1</span>)</span><br><span class="line">index[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tensor(335)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>这行代码将通过softmax函数将张量out在第1维上进行归一化，使得输出的每个元素都在[0,1]范围内且和为1。然后，它选择第0个元素，将它乘以100，最终返回一个新的张量。这个张量的每个元素表示相应类别的概率百分比。</strong></p>
+<p><strong>这里out是一个形状为(1, 1000)的张量，表示有1000个类别的预测分数，dim&#x3D;1表示对第二个维度进行操作，也就是对每个样本的1000个输出值进行操作，[0]表示取第一个样本，最后乘以100得到百分率常用表达形式</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">percentage = torch.nn.functional.softmax(out, dim=<span class="number">1</span>)[<span class="number">0</span>] * <span class="number">100</span> <span class="comment">##[0]，这里理解有点问题</span></span><br><span class="line">labels[index[<span class="number">0</span>]], percentage[index[<span class="number">0</span>]].item()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(&#x27;fox squirrel, eastern fox squirrel, Sciurus niger&#x27;, 99.84718322753906)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>enumerate() 是 Python 内置的函数之一，用于在迭代一个序列时同时获取每个元素的索引和对应的值。<br>在 for i, p in enumerate(percentage) 中，percentage 应该是一个序列（如列表或元组），i 是序列中每个元素的索引（从0开始），p 是对应的元素值。通过 enumerate() 函数，我们可以同时遍历序列的索引和值，使得在循环体内能够更方便地使用这两个值。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">percentage = [50, 75, 90, 100]</span><br><span class="line">for i, p in enumerate(percentage):</span><br><span class="line">    print(&quot;The percentage of completion for task&quot;, i, &quot;is&quot;, p, &quot;%.&quot;)</span><br><span class="line">##输出</span><br><span class="line">The percentage of completion for task 0 is 50%.</span><br><span class="line">The percentage of completion for task 1 is 75%.</span><br><span class="line">The percentage of completion for task 2 is 90%.</span><br><span class="line">The percentage of completion for task 3 is 100%.</span><br></pre></td></tr></table></figure>
+
+<p><strong>列出“置信率”列表</strong></p>
+<ol start="2">
+<li>第二种方式实现列出前五个较高的概率对应的类别</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">probs = torch.nn.functional.softmax(out, dim=1)[0:5]</span><br><span class="line">top_probs, top_classes = probs.topk(k=3, dim=1)</span><br><span class="line">for i in range(5):</span><br><span class="line">    print(f&quot;Sample &#123;i&#125; top 3 classes with probabilities:&quot;)</span><br><span class="line">    for j in range(3):</span><br><span class="line">        print(f&quot;Class &#123;top_classes[i][j]&#125;: &#123;top_probs[i][j]*100:.2f&#125;%&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>topk()函数可以在指定维度上返回前k个最大的元素以及它们的索引。在这里，我们指定k&#x3D;3表示返回前三个最大的概率值以及对应的类别索引。</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">_, indices = torch.sort(out, descending=<span class="literal">True</span>)</span><br><span class="line">[(labels[idx], percentage[idx].item()) <span class="keyword">for</span> idx <span class="keyword">in</span> indices[<span class="number">0</span>][:<span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[(&#x27;fox squirrel, eastern fox squirrel, Sciurus niger&#x27;, 99.84718322753906),</span><br><span class="line"> (&#x27;hare&#x27;, 0.03233512118458748),</span><br><span class="line"> (&#x27;marmot&#x27;, 0.016555076465010643),</span><br><span class="line"> (&#x27;titi, titi monkey&#x27;, 0.012815508060157299),</span><br><span class="line"> (&#x27;guenon, guenon monkey&#x27;, 0.008419022895395756)]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">4</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">5</span>]</span><br><span class="line"><span class="comment"># 使用sort()函数排序</span></span><br><span class="line">numbers.sort(reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(numbers)  <span class="comment"># 输出 [1, 2, 4, 5, 7, 9]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[9, 7, 5, 4, 2, 1]</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Eureka Cheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/30/ResNet%E9%A2%84%E8%AE%AD%E7%BB%83/">http://example.com/2023/03/30/ResNet预训练/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Eureka's World</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/pytorch/">pytorch</a></div><div class="post_share"><div class="social-share" data-image="/img/sea101.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/30/CycleGAN%E9%A2%84%E8%AE%AD%E7%BB%83/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly12.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CycleGAN预训练</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/30/0317-%E5%BC%A0%E9%87%8F/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/sea106.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">0317_张量</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2023/03/20/pytorch-GPU%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" title="pytorch_GPU环境搭建"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-20</div><div class="title">pytorch_GPU环境搭建</div></div></a></div><div><a href="/2023/03/30/0317-%E5%BC%A0%E9%87%8F/" title="0317_张量"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/sea106.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">0317_张量</div></div></a></div><div><a href="/2023/03/30/CycleGAN%E9%A2%84%E8%AE%AD%E7%BB%83/" title="CycleGAN预训练"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-03-30</div><div class="title">CycleGAN预训练</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/QQ.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Eureka Cheng</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/EurekaCheng"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/EurekaCheng" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:hongc3737@gmail.com" target="_blank" title="Gmail"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/03/30/CycleGAN%E9%A2%84%E8%AE%AD%E7%BB%83/" title="CycleGAN预训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly12.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CycleGAN预训练"/></a><div class="content"><a class="title" href="/2023/03/30/CycleGAN%E9%A2%84%E8%AE%AD%E7%BB%83/" title="CycleGAN预训练">CycleGAN预训练</a><time datetime="2023-03-30T08:45:23.000Z" title="发表于 2023-03-30 16:45:23">2023-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/30/ResNet%E9%A2%84%E8%AE%AD%E7%BB%83/" title="ResNet预训练"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/sea101.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ResNet预训练"/></a><div class="content"><a class="title" href="/2023/03/30/ResNet%E9%A2%84%E8%AE%AD%E7%BB%83/" title="ResNet预训练">ResNet预训练</a><time datetime="2023-03-30T08:44:53.000Z" title="发表于 2023-03-30 16:44:53">2023-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/30/0317-%E5%BC%A0%E9%87%8F/" title="0317_张量"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/sea106.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0317_张量"/></a><div class="content"><a class="title" href="/2023/03/30/0317-%E5%BC%A0%E9%87%8F/" title="0317_张量">0317_张量</a><time datetime="2023-03-30T01:50:33.000Z" title="发表于 2023-03-30 09:50:33">2023-03-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/26/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="Python常用函数"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python常用函数"/></a><div class="content"><a class="title" href="/2023/03/26/Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="Python常用函数">Python常用函数</a><time datetime="2023-03-26T10:46:11.000Z" title="发表于 2023-03-26 18:46:11">2023-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/26/Python%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/" title="Python高级用法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/fly9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python高级用法"/></a><div class="content"><a class="title" href="/2023/03/26/Python%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/" title="Python高级用法">Python高级用法</a><time datetime="2023-03-26T10:45:51.000Z" title="发表于 2023-03-26 18:45:51">2023-03-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Eureka Cheng</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">欢迎您的到来</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Bwz3dUPrUtqxjRL22TRz4VH0-gzGzoHsz',
+      appKey: '6yAEOtkjz3LJjO8OpeWp1bPk',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script type="text/javascript" src="/js/fairyDustCursor.js"></script><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'messageboard/community',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (false) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
