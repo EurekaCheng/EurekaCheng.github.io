@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2023-05-27T02:36:15.816Z</updated>
+  <updated>2024-10-05T05:10:00.853Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Wallpaper Engine引起关于开机程序快速启动问题的解决</title>
+    <link href="http://example.com/2024/10/05/Wallpaper-engine%E5%BC%95%E8%B5%B7%E5%85%B3%E4%BA%8E%E5%BC%80%E6%9C%BA%E7%A8%8B%E5%BA%8F%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
+    <id>http://example.com/2024/10/05/Wallpaper-engine%E5%BC%95%E8%B5%B7%E5%85%B3%E4%BA%8E%E5%BC%80%E6%9C%BA%E7%A8%8B%E5%BA%8F%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
+    <published>2024-10-05T05:06:08.000Z</published>
+    <updated>2024-10-05T05:10:00.853Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>问题</strong>：</p><ol><li>wallpaper在更改壁纸后，重启，在开机后第一时间出现的是原有壁纸而非新壁纸</li><li>这是一个在解决第一个问题过程中的附带问题：我想要在开机后，后台自动开机启动的软件（比如TranslucentTB）能够第一时间启动。</li></ol><p><strong>解决过程</strong>：</p><ol><li>查阅资料：<a href="https://guanjia.qq.com/knowledge-base/content/1156?from=clinic">快速启动</a>，（思路错误，我们要解决的是开机应用的启动而非快速开机）<strong>遇到问题：<code>gpedit.msc</code>打不开</strong> &#x3D;&#x3D;解决win11 gpedit.msc（组策略编辑器）打不开：&#x3D;&#x3D;  完成相应设置</li></ol><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">##创建gpedit.bat文件，以管理员身份打开，文件内容如下：</span><br><span class="line">​```batch</span><br><span class="line"></span><br><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %systemroot%\Windows\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~3*.mum &gt;gp.txt</span><br><span class="line"></span><br><span class="line">dir /b %systemroot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~3*.mum &gt;&gt;gp.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . gp.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%systemroot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">pause</span><br><span class="line"></span><br></pre></td></tr></table></figure><ol start="2"><li>在wallpaper设置–常规–开机自启动选择高优先级，会自启动但原来壁纸会短时间出现。</li><li>此电脑—-属性—-高级设置—性能—–最佳性能（P）修改后，开机还是会出现原壁纸，但是新旧壁纸交替时间缩短。副作用：电脑字体显示模糊</li></ol><p><strong>反思</strong>：只做步骤2可能就可以解决问题一，但是我们先做了步骤1，导致系统开机更快，所以先短暂出现了原来的壁纸；步骤3，性能部分只是修改视觉上的显示性能而非电脑开机后应用的开机先后，考虑到副作用最后也改为原本设置。</p><p><strong>尝试</strong>：修改回步骤1内容，重启，成功先修改后壁纸；修改回步骤3，系统尤其是网页字体恢复。至此，问题一解决。</p><p><strong>深入了解底层原理：</strong></p><ol><li>开了快速启动的关机相当于休眠（上述步骤1），重启就是重新启动，没有把当前系统持久化这一步。</li><li>程序自启动有两种，一是把程序加入到程序自启动列表，二是把程序变成系统服务。</li><li>wallpaper高优先级开机启动是将程序变成系统服务。</li></ol><p>&#x3D;&#x3D;所以，如果开了快速开机，关机相当于休眠，会丢失wallpaper的系统服务，无法自启动，而重启会使得原壁纸被先加载出来。&#x3D;&#x3D;</p><p>问题二解决：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">##以管理员身份打开命令提示符，运行如下代码（wallpaperservice32.exe位置需要你打开任务管理器--查看服务--右击wallpaper,点击打开服务，在服务中找到wallpaper,再右击属性查看可执行文件路径；-p 后面接的是你要高优先级打开的.exe文件路径）</span><br><span class="line">sc create TranslucentTB binPath= &quot;\&quot;C:\WINDOWS\SysWOW64\wallpaperservice32.exe\&quot; -p \&quot;&lt;your path&gt;\TranslucentTB.exe\&quot;&quot; start= auto</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##一般自启动文件路径（将程序快捷文件，放入该路径文件下）</span><br><span class="line">%AppData%\Microsoft\Windows\Start Menu\Programs\Startup</span><br><span class="line"></span><br><span class="line">##使用以下命令检查服务状态：</span><br><span class="line"></span><br><span class="line">sc query &lt;ServiceName&gt;</span><br><span class="line"></span><br><span class="line">拓展：</span><br><span class="line">下载并安装 NSSM</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><strong><code>Listary pro</code></strong>:  <a href="https://www.cnblogs.com/lrain/p/17018417.html">付费版本注册码获取网址</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;问题&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;wallpaper在更改壁纸后，重启，在开机后第一时间出现的是原有壁纸而非新壁纸&lt;/li&gt;
+&lt;li&gt;这是一个在解决第一个问题过程中的附带问题：我想要在开机后，后台自动开机启动的软件（比如Translucen</summary>
+      
+    
+    
+    
+    <category term="Windows系统" scheme="http://example.com/categories/Windows%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="桌面优化" scheme="http://example.com/tags/%E6%A1%8C%E9%9D%A2%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>煤炭价格预测</title>
