@@ -270,7 +270,7 @@
     <link href="http://example.com/2023/03/02/CUDA%E4%B8%8ECUDnn%E5%AE%89%E8%A3%85%E5%85%A8%E8%BF%87%E7%A8%8B%EF%BC%88%E5%A4%9A%E7%89%88%E6%9C%AC%EF%BC%89/"/>
     <id>http://example.com/2023/03/02/CUDA%E4%B8%8ECUDnn%E5%AE%89%E8%A3%85%E5%85%A8%E8%BF%87%E7%A8%8B%EF%BC%88%E5%A4%9A%E7%89%88%E6%9C%AC%EF%BC%89/</id>
     <published>2023-03-02T02:54:33.000Z</published>
-    <updated>2023-03-02T03:04:30.124Z</updated>
+    <updated>2024-10-05T06:14:06.685Z</updated>
     
     <content type="html"><![CDATA[<h2 id="CUDA与CUDnn基本介绍"><a href="#CUDA与CUDnn基本介绍" class="headerlink" title="CUDA与CUDnn基本介绍"></a>CUDA与CUDnn基本介绍</h2><h3 id="什么是CUDA"><a href="#什么是CUDA" class="headerlink" title="什么是CUDA"></a>什么是CUDA</h3><p>CUDA(ComputeUnified Device Architecture)，是显卡厂商NVIDIA推出的运算平台。 CUDA是一种由NVIDIA推出的通用并行计算架构，该架构使GPU能够解决复杂的计算问题。</p><h3 id="什么是CUDNN"><a href="#什么是CUDNN" class="headerlink" title="什么是CUDNN"></a>什么是CUDNN</h3><p>NVIDIA cuDNN是用于深度神经网络的GPU加速库。它强调性能、易用性和低内存开销。NVIDIA cuDNN可以集成到更高级别的机器学习框架中，如谷歌的Tensorflow、加州大学伯克利分校的流行caffe软件。简单的插入式设计可以让开发人员专注于设计和实现神经网络模型，而不是简单调整性能，同时还可以在GPU上实现高性能现代并行计算。</p><h3 id="CUDA与CUDNN的关系"><a href="#CUDA与CUDNN的关系" class="headerlink" title="CUDA与CUDNN的关系"></a>CUDA与CUDNN的关系</h3><p>CUDA看作是一个工作台，上面配有很多工具，如锤子、螺丝刀等。cuDNN是基于CUDA的深度学习GPU加速库，有了它才能在GPU上完成深度学习的计算。它就相当于工作的工具，比如它就是个扳手。但是CUDA这个工作台买来的时候，并没有送扳手。想要在CUDA上运行深度神经网络，就要安装cuDNN，就像你想要拧个螺帽就要把扳手买回来。这样才能使GPU进行深度神经网络的工作，工作速度相较CPU快很多。</p><h2 id="CUDA与CUDnn安装全过程（多版本）"><a href="#CUDA与CUDnn安装全过程（多版本）" class="headerlink" title="CUDA与CUDnn安装全过程（多版本）"></a>CUDA与CUDnn安装全过程（多版本）</h2><p>CUDA安装链接：<a href="https://developer.nvidia.com/cuda-toolkit-archive">https://developer.nvidia.com/cuda-toolkit-archive</a></p><p>多版本安装时需注意，如果安装的版本比之前的都要高（比如电脑已经有了10.2，现在要装11.3），那么就需要勾选安装全部，反之只需要勾选安装CUDA的那个选项就好。</p><p>安装过程一共涉及到两次安装路径的选择，第一次选择默认（这样不用自己手动添加环境变量，似乎更改后系统仍会自行改回），第二次可以任意更改为自己方便的路径。</p><p>CUDnn安装链接：<a href="https://developer.nvidia.com/rdp/cudnn-download">https://developer.nvidia.com/rdp/cudnn-download</a></p><p>这里面有<code>bin</code> <code>include</code> <code>lib</code>三个文件夹，将对应的文件里的内容复制到你第二次填写安装路径，对应的文件就好。（比如我第二次选择CUDA的安装路径是F:\CUDA10.2,那么我就需要将CUDnn里的<code>bin</code>等文件复制到F:\CUDA10.2\bin中）</p><p>检测安装是否成功：</p><img src="/2023/03/02/CUDA%E4%B8%8ECUDnn%E5%AE%89%E8%A3%85%E5%85%A8%E8%BF%87%E7%A8%8B%EF%BC%88%E5%A4%9A%E7%89%88%E6%9C%AC%EF%BC%89/%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F.png" class=""><p>不同版本CUDA的切换：</p><p>只需要更改环境变量中PATH的上下位置，所需CUDA版本的位置在上，则系统就会调用该版本，就实现了版本的切换。</p><img src="/2023/03/02/CUDA%E4%B8%8ECUDnn%E5%AE%89%E8%A3%85%E5%85%A8%E8%BF%87%E7%A8%8B%EF%BC%88%E5%A4%9A%E7%89%88%E6%9C%AC%EF%BC%89/%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2.png" class="">]]></content>
     
@@ -282,11 +282,9 @@
     
     
     
-    <category term="NVIDIA" scheme="http://example.com/categories/NVIDIA/"/>
+    <category term="通用并行计算架构" scheme="http://example.com/categories/%E9%80%9A%E7%94%A8%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84/"/>
     
-    <category term="通用并行计算架构" scheme="http://example.com/categories/NVIDIA/%E9%80%9A%E7%94%A8%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="深度神经网络的GPU加速库" scheme="http://example.com/categories/NVIDIA/%E9%80%9A%E7%94%A8%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84/%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84GPU%E5%8A%A0%E9%80%9F%E5%BA%93/"/>
+    <category term="深度神经网络的GPU加速库" scheme="http://example.com/categories/%E9%80%9A%E7%94%A8%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97%E6%9E%B6%E6%9E%84/%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84GPU%E5%8A%A0%E9%80%9F%E5%BA%93/"/>
     
     
     <category term="CUDA&amp;CUDnn" scheme="http://example.com/tags/CUDA-CUDnn/"/>

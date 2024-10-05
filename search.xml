@@ -263,8 +263,6 @@
       
       <categories>
           
-          <category> NVIDIA </category>
-          
           <category> 通用并行计算架构 </category>
           
           <category> 深度神经网络的GPU加速库 </category>
